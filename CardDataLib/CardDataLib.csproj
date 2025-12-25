@@ -23,32 +23,12 @@
             <HintPath>Libs\BepInEx.dll</HintPath>
 			<Private>false</Private>
         </Reference>
-        <Reference Include="Newtonsoft.Json">
-			<HintPath>Libs\Newtonsoft.Json.dll</HintPath>
-			<Private>false</Private>
-        </Reference>
-        <Reference Include="TexturesLib.Cards.Cards">
-            <HintPath>Libs\TexturesLib.Cards.dll</HintPath>
-			<Private>false</Private>
-		</Reference>
-        <Reference Include="TexturesLib.Shared">
-            <HintPath>..\..\CardsCreator\CardsCreator\Libs\TexturesLib.Shared.dll</HintPath>
-			<Private>false</Private>
-		</Reference>
         <Reference Include="UnityEngine">
             <HintPath>Libs\UnityEngine.dll</HintPath>
 			<Private>false</Private>
         </Reference>
         <Reference Include="UnityEngine.CoreModule">
             <HintPath>Libs\UnityEngine.CoreModule.dll</HintPath>
-			<Private>false</Private>
-        </Reference>
-        <Reference Include="UnityEngine.ImageConversionModule">
-            <HintPath>Libs\UnityEngine.ImageConversionModule.dll</HintPath>
-			<Private>false</Private>
-		</Reference>
-        <Reference Include="UnityEngine.InputLegacyModule">
-            <HintPath>Libs\UnityEngine.InputLegacyModule.dll</HintPath>
 			<Private>false</Private>
         </Reference>
         <Reference Include="UnityEngine.TextRenderingModule">

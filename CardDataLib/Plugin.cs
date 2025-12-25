@@ -11,8 +11,6 @@ using UnityEngine.SceneManagement;
 namespace CardDataLib
 {
     [BepInPlugin("AgusBut.CardDataLib", "CardDataLib", "1.0.0")]
-    [BepInDependency("AgusBut.TexturesLib.Shared")]
-    [BepInDependency("AgusBut.TexturesLib.Cards")]
     public class Plugin : BaseUnityPlugin
     {
         public static Plugin Instance { get; private set; }
@@ -46,17 +44,21 @@ namespace CardDataLib
 
         private void OnActiveSceneChanged(Scene oldScene, Scene newScene)
         {
+            if (newScene.name == "MainMenu")
+            {
+                CardDataLibAPI.AttachSpritesToCards(); // Attach sprites that exist in the main menu
+
+                Instance.StartCoroutine(WaitThenCorrectMainMenuCards());
+            }
+
             if (newScene.name == "GameScene")
             {
                 CardsInSceneCorrector corrector = new CardsInSceneCorrector();
                 corrector.CorrectGameSceneCards();
 
-                RaiseOnCardSyncComplete();
-            }
+                CardDataLibAPI.AttachSpritesToCards(); // Attach sprites that only exist in-game
 
-            if (newScene.name == "MainMenu")
-            {
-                Instance.StartCoroutine(WaitThenCorrectMainMenuCards());
+                RaiseOnCardSyncComplete();
             }
         }
 

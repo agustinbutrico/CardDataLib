@@ -2,25 +2,55 @@
 using CardsShared;
 using System.Collections.Generic;
 using System.Linq;
-using TexturesLib.Shared;
+using UnityEngine;
 
 namespace CardDataLib
 {
     public static partial class CardDataLibAPI
     {
+        private static readonly Dictionary<string, Sprite> _spriteCache = new Dictionary<string, Sprite>();
+
+        private static Sprite FindSpriteByName(string spriteName)
+        {
+            if (_spriteCache.TryGetValue(spriteName, out var sprite))
+                return sprite;
+
+            foreach (var s in Resources.FindObjectsOfTypeAll<Sprite>())
+            {
+                if (s.name == spriteName)
+                {
+                    _spriteCache[spriteName] = s;
+                    return s;
+                }
+            }
+
+            return null;
+        }
+
+        public static void AttachSpritesToCards()
+        {
+            var missingSprites = new HashSet<string>();
+
+            foreach (var card in Plugin.CardDisplayDataCollection.AllCards)
+            {
+                var sprite = FindSpriteByName(card.SpriteName);
+                if (sprite != null)
+                    card.Sprite = sprite;
+                else
+                    if (!string.IsNullOrWhiteSpace(card.SpriteName))
+                    missingSprites.Add(card.SpriteName);
+            }
+        
+            if (missingSprites.Count > 0)
+                if (missingSprites.Count == 1)
+                    Plugin.Log.LogInfo($"The sprite {missingSprites.First()} was not found in the current scene.");
+                else
+                    Plugin.Log.LogInfo($"The sprites {string.Join(", ", missingSprites)} were not found in the current scene.");
+        }
         public static void LoadAllCards()
         {
             if (Plugin.CardDisplayDataCollection.AllCards.Count == 0)
                 CardData.CardsRegisterManager.RegisterAllCards();
-
-            foreach (var card in Plugin.CardDisplayDataCollection.AllCards)
-            {
-                var sprite = SpriteHelper.FindSpriteByName(card.SpriteName);
-                if (sprite != null)
-                    card.Sprite = sprite;
-                else
-                    Plugin.Log.LogWarning($"Sprite '{card.SpriteName}' not found for card '{card.Title}' via SpriteHelper.");
-            }
 
             Plugin.Log.LogInfo($"Loaded {Plugin.CardDisplayDataCollection.AllCards.Count} cards.");
         }
