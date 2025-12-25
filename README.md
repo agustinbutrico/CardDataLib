@@ -18,7 +18,7 @@ CardDataLib loads all 638 base‑game cards into any scene and fixes a large set
 
     Discrepancies fixed between MainMenu and GameScene names.
 
-    Missing dependencies restored, preventing 13 unique cards from being unobtainable.
+    Missing dependencies restored, this where preventing 13 unique cards from being obtainable.
 
     Sprite linking via TexturesLib.Shared.SpriteHelper.FindSpriteByName.
 
