@@ -30,7 +30,7 @@ namespace CardDataLib
         public static void AttachSpritesToCards()
         {
             var missingSprites = new HashSet<string>();
-
+    
             foreach (var card in Plugin.CardDisplayDataCollection.AllCards)
             {
                 var sprite = FindSpriteByName(card.SpriteName);
