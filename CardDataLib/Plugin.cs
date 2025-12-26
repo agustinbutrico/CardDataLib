@@ -10,7 +10,7 @@ using UnityEngine.SceneManagement;
 
 namespace CardDataLib
 {
-    [BepInPlugin("AgusBut.CardDataLib", "CardDataLib", "1.0.0")]
+    [BepInPlugin("AgusBut.CardDataLib", "CardDataLib", "1.0.1")]
     public class Plugin : BaseUnityPlugin
     {
         public static Plugin Instance { get; private set; }
